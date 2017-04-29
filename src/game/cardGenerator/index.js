@@ -6,33 +6,72 @@ import values from './values'
 
 const manaCost = value => Math.ceil(value / values.manaCost)
 
-const randomModifier = (existent) => {
-  const modifiers = keys(without(existent, value.modifiers))
-  const index = Math.floor(Math.random() * modifiers.length)
-  return modifiers[index]
-}
+const randomFromArray = array =>
+  array[Math.floor(array.length * Math.random())]
 
-// chance is given in %, rng(50) = 50% chance
-const rng = chance => (Math.random() * 100) < chance
+const randomModifier = pipe(
+  without(__, values.modifiers),
+  keys,
+  randomFromArray,
+)
 
-const calculateValue = card =>
+const addModifier = card => merge(card, {
+  modifiers: [
+    ...card.modifiers,
+    randomModifiers(card.modifiers)
+  ]
+})
+
+const canAddModifier = pipe(
+  prop('modifiers'),
+  length,
+  equals(values.modifiers.length),
+  not
+)
+
+
+const addStat = (type, card) => merge(card, {
+  [type]: card[type] + 1
+})
+
+const buildCard = applySpec({
+  manaCost,
+  modifiers: always([]),
+})
+
+const calculateStats = pipe(
+  prop('stats'),
+  toPairs,
+  reduce((acc, [key, value]) => acc + value * values.stats[key], 0)
+)
+
+const calculateModifiers = pipe(
+  prop('modifiers'),
+  reduce((acc, name) => acc + values.modifiers[name], 0)
+)
+
+const calculateValue = pipe(
+  ap([calculateStats, calculateModifiers]),
+  reduce(add, 0)
+)
+
+const rngPass = percentageChance =>
+  (Math.random() * 100) < percentageChance
 
 export default function generate (value, card) {
   if (calculateValue(card) > value) {
     return card
   }
   if (!card) {
-    card = {
-      cost: manaCost(value),
-      modifiers: [],
-    }
+    return generate(value, buildCard(value))
   }
-  if (rng(20) && card.modifiers.length !== values.modifiers.length) { 
-    return generate(value, merge(card, {
-      modifiers: [
-        ...card.modifiers,
-        randomModifiers(card.modifiers)
-      ]
-    }))
+  if (rngPass(20) && canAddModifier(card)) { 
+    return generate(value, addModifier(card))
+  }
+  if (rngPass(50)) { 
+    return generate(value, addStat('attack', card))
+  }
+  else {
+    return generate(value, addStat('defense', card))
   }
 }
