@@ -1,4 +1,4 @@
-export default {
+module.exports = {
   manaCost: 30,
   stats: {
     attack: -10,

@@ -1,8 +1,27 @@
-import {
+const {
+  tap,
+  ifElse,
+  gte,
+  has,
+  of,
   merge,
+  pipe,
+  keys,
   without,
-} from 'ramda'
-import values from './values'
+  __,
+  length,
+  not,
+  equals,
+  prop,
+  applySpec,
+  always,
+  toPairs,
+  reduce,
+  ap,
+  add,
+} = require('ramda')
+
+const values = require('./values')
 
 const manaCost = value => Math.ceil(value / values.manaCost)
 
@@ -10,33 +29,38 @@ const randomFromArray = array =>
   array[Math.floor(array.length * Math.random())]
 
 const randomModifier = pipe(
-  without(__, values.modifiers),
-  keys,
-  randomFromArray,
+  without(__, keys(values.modifiers)),
+  randomFromArray
 )
 
 const addModifier = card => merge(card, {
   modifiers: [
     ...card.modifiers,
-    randomModifiers(card.modifiers)
-  ]
+    randomModifier(card.modifiers),
+  ],
 })
 
 const canAddModifier = pipe(
   prop('modifiers'),
   length,
-  equals(values.modifiers.length),
+  gte(__, length(keys(values.modifiers))),
   not
 )
 
 
 const addStat = (type, card) => merge(card, {
-  [type]: card[type] + 1
+  stats: merge(card.stats, {
+    [type]: card.stats[type] + 1,
+  }),
 })
 
 const buildCard = applySpec({
   manaCost,
   modifiers: always([]),
+  stats: always({
+    attack: 0,
+    defense: 0,
+  }),
 })
 
 const calculateStats = pipe(
@@ -51,27 +75,29 @@ const calculateModifiers = pipe(
 )
 
 const calculateValue = pipe(
-  ap([calculateStats, calculateModifiers]),
+  of,
+  ap([
+    calculateStats,
+    calculateModifiers,
+  ]),
   reduce(add, 0)
 )
 
 const rngPass = percentageChance =>
   (Math.random() * 100) < percentageChance
 
-export default function generate (value, card) {
-  if (calculateValue(card) > value) {
-    return card
-  }
+module.exports = function generate (value, card) {
   if (!card) {
     return generate(value, buildCard(value))
   }
-  if (rngPass(20) && canAddModifier(card)) { 
+  if (value + calculateValue(card) < 0) {
+    return card
+  }
+  if (rngPass(10) && card.modifiers && canAddModifier(card)) { 
     return generate(value, addModifier(card))
   }
   if (rngPass(50)) { 
     return generate(value, addStat('attack', card))
   }
-  else {
-    return generate(value, addStat('defense', card))
-  }
+  return generate(value, addStat('defense', card))
 }
