@@ -22,8 +22,7 @@ const {
 } = require('ramda')
 
 const values = require('./values')
-
-const manaCost = value => Math.ceil(value / values.manaCost)
+const types = require('./types')
 
 const randomFromArray = array =>
   array[Math.floor(array.length * Math.random())]
@@ -47,15 +46,19 @@ const canAddModifier = pipe(
   not
 )
 
-
 const addStat = (type, card) => merge(card, {
   stats: merge(card.stats, {
     [type]: card.stats[type] + 1,
   }),
 })
 
+const randomType = () => randomFromArray(types.map(prop('name')))
+
+const manaCost = value => Math.ceil(value / values.manaCost)
+
 const buildCard = applySpec({
   manaCost,
+  type: randomType,
   modifiers: always([]),
   stats: always({
     attack: 0,
@@ -86,18 +89,19 @@ const calculateValue = pipe(
 const rngPass = percentageChance =>
   (Math.random() * 100) < percentageChance
 
-module.exports = function generate (value, card) {
-  if (!card) {
-    return generate(value, buildCard(value))
+module.exports = function generate (seedValue, card = buildCard(seedValue)) {
+  if (seedValue < calculateValue(card)) {
+    return merge(card, {
+      value: calculateValue(card),
+      seedValue,
+    })
   }
-  if (value + calculateValue(card) < 0) {
-    return card
-  }
-  if (rngPass(10) && card.modifiers && canAddModifier(card)) { 
-    return generate(value, addModifier(card))
+  if (rngPass(5) && canAddModifier(card)) { 
+    return generate(seedValue, addModifier(card))
   }
   if (rngPass(50)) { 
-    return generate(value, addStat('attack', card))
+    return generate(seedValue, addStat('attack', card))
   }
-  return generate(value, addStat('defense', card))
+  return generate(seedValue, addStat('defense', card))
 }
+
