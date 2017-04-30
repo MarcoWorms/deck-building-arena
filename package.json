@@ -9,6 +9,7 @@
     "ramda": "^0.23.0"
   },
   "scripts": {
+    "start": "node src/game/index.js",
     "test": "jest"
   }
 }
