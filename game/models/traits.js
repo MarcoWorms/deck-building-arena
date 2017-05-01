@@ -1,23 +1,23 @@
 export default [
   {
     type: 'quick',
-    description: 'Attacks in the same turn that it was summoned',
+    description: 'Attack in the same turn that it was summoned',
   },
   {
     type: 'tank',
-    description: 'Forces enemies creatures to attack this',
+    description: 'Force enemy creatures to attack it',
   },
   {
     type: 'shield',
-    description: 'Takes 0 damage in the first hit',
+    description: 'First hit taken deals no damage',
   },
   {
     type: 'double tap',
-    description: 'Attacks twice',
+    description: 'Attack twice',
   },
   {
     type: 'splash',
-    description: 'Attacks all creatures at once',
+    description: 'Attack all creatures at once',
   },
 ]
 

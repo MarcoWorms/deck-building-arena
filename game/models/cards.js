@@ -1,46 +1,205 @@
 export default [
-// Turn 0
-  {
-    turn: 0,
+// Turn 1
+  { 
+    turn: 1,
     attack: 2,
-    defense: 3,
-    traits: [],
-  },
-  {
-    turn: 0,
-    attack: 3,
     defense: 2,
     traits: [],
   },
   {
-    turn: 0,
-    attack: 2,
+    turn: 1,
+    attack: 1,
     defense: 1,
     traits: ['quick'],
   },
   {
-    turn: 0,
+    turn: 1,
     attack: 1,
     defense: 1,
     traits: ['splash'],
   },
   {
-    turn: 0,
-    attack: 1,
-    defense: 3,
+    turn: 1,
+    attack: 2,
+    defense: 1,
     traits: ['tank'],
   },
   {
-    turn: 0,
+    turn: 1,
     attack: 1,
     defense: 1,
     traits: ['shield'],
   },
   {
-    turn: 0,
+    turn: 1,
     attack: 2,
     defense: 1,
     traits: ['double tap'],
   },
-// Turn 1
+// Turn 2
+  {
+    turn: 2,
+    attack: 2,
+    defense: 3,
+    traits: [],
+  },
+  {
+    turn: 2,
+    attack: 3,
+    defense: 2,
+    traits: [],
+  },
+  {
+    turn: 2,
+    attack: 2,
+    defense: 1,
+    traits: ['quick'],
+  },
+  {
+    turn: 2,
+    attack: 1,
+    defense: 2,
+    traits: ['splash'],
+  },
+  {
+    turn: 2,
+    attack: 1,
+    defense: 3,
+    traits: ['tank'],
+  },
+  {
+    turn: 2,
+    attack: 2,
+    defense: 2,
+    traits: ['shield'],
+  },
+  {
+    turn: 2,
+    attack: 3,
+    defense: 1,
+    traits: ['double tap'],
+  },
+// Turn 3
+  {
+    turn: 3,
+    attack: 4,
+    defense: 3,
+    traits: [],
+  },
+  {
+    turn: 3,
+    attack: 3,
+    defense: 4,
+    traits: [],
+  },
+  {
+    turn: 3,
+    attack: 3,
+    defense: 2,
+    traits: ['quick'],
+  },
+  {
+    turn: 3,
+    attack: 2,
+    defense: 2,
+    traits: ['splash'],
+  },
+  {
+    turn: 3,
+    attack: 3,
+    defense: 3,
+    traits: ['tank'],
+  },
+  {
+    turn: 3,
+    attack: 3,
+    defense: 2,
+    traits: ['shield'],
+  },
+  {
+    turn: 3,
+    attack: 3,
+    defense: 2,
+    traits: ['double tap'],
+  },
+// Turn 4
+  {
+    turn: 4,
+    attack: 4,
+    defense: 5,
+    traits: [],
+  },
+  {
+    turn: 4,
+    attack: 5,
+    defense: 4,
+    traits: [],
+  },
+  {
+    turn: 4,
+    attack: 3,
+    defense: 5,
+    traits: ['quick'],
+  },
+  {
+    turn: 4,
+    attack: 2,
+    defense: 4,
+    traits: ['splash'],
+  },
+  {
+    turn: 4,
+    attack: 3,
+    defense: 5,
+    traits: ['tank'],
+  },
+  {
+    turn: 4,
+    attack: 5,
+    defense: 3,
+    traits: ['shield'],
+  },
+  {
+    turn: 4,
+    attack: 4,
+    defense: 2,
+    traits: ['double tap'],
+  },
+// Turn 5
+  {
+    turn: 5,
+    attack: 6,
+    defense: 6,
+    traits: [],
+  },
+  {
+    turn: 5,
+    attack: 6,
+    defense: 3,
+    traits: ['quick'],
+  },
+  {
+    turn: 5,
+    attack: 3,
+    defense: 5,
+    traits: ['splash'],
+  },
+  {
+    turn: 5,
+    attack: 3,
+    defense: 7,
+    traits: ['tank'],
+  },
+  {
+    turn: 5,
+    attack: 6,
+    defense: 3,
+    traits: ['shield'],
+  },
+  {
+    turn: 5,
+    attack: 6,
+    defense: 2,
+    traits: ['double tap'],
+  },
 ]
