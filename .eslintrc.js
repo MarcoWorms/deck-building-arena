@@ -1,46 +1,13 @@
 module.exports = {
+  "extends": ["airbnb-base"],
   "env": {
     "browser": true,
-    "es6": true,
     "node": true,
+    "jest": true
   },
-  "extends": "eslint:recommended",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
-      "jsx": true,
-    },
-    "sourceType": "module",
-  },
-  "plugins": [
-    "react",
-  ],
   "rules": {
-    "indent": [
-      "error",
-      2,
-    ],
-    "linebreak-style": [
-      "error",
-      "unix",
-    ],
-    "quotes": [
-      "error",
-      "single",
-    ],
-    "semi": [
-      "error",
-      "never",
-    ],
-    "comma-dangle": [
-      "error",
-      {
-        "arrays": "always",
-        "objects": "always",
-        "imports": "always",
-        "exports": "always",
-        "functions": "ignore",
-      },
-    ]
-  },
+    "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
+    "semi": [2, "never"],
+    "space-before-function-paren": [2, "always"]
+  }
 }
