@@ -1,30 +1,14 @@
-import {
-  __,
-  filter,
-  pipe,
-  prop,
-  propEq,
-  uniq,
-  uniqBy,
-} from 'ramda'
+import buildRandomDeck from './buildRandomDeck'
+import combat from './combat'
 
-import models from './models'
-import { randomFromArray } from './rng'
+const player1 = {
+  id: '111',
+  deck: buildRandomDeck(), 
+}``
+const player2 = {
+  id: '222',
+  deck: buildRandomDeck(), 
+}
 
-const randomCard = turn => randomFromArray(
-  models.cards.filter(propEq('turn', turn))
-)
-  
-//   pipe(
-//   propEq('turn'),
-//   filter(__, models.cards),
-//   randomFromArray
-// )
+console.log(combat([player1, plqyer2]))
 
-const turns = uniqBy(prop('turn'), models.cards)
-  .map(prop('turn'))
-
-const buildDeck = () => turns.map(randomCard)
-
-console.log(buildDeck())
-console.log(buildDeck())
