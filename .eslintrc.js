@@ -8,6 +8,16 @@ module.exports = {
   "rules": {
     "import/no-extraneous-dependencies": [2, { "devDependencies": true }],
     "semi": [2, "never"],
-    "space-before-function-paren": [2, "always"]
-  }
+    "space-before-function-paren": [2, "always"],
+    "comma-dangle": [
+      'error',
+      {
+        arrays: 'always',
+        objects: 'always',
+        imports: 'always',
+        exports: 'always',
+        functions: 'never',
+      },
+    ],
+  },
 }

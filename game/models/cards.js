@@ -1,6 +1,6 @@
 export default [
 // Turn 1
-  { 
+  {
     turn: 1,
     attack: 2,
     defense: 2,
