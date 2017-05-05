@@ -15,40 +15,24 @@ const decks = pipe(
   map(prop('deck'))
 )
 
-const calculateLife = (state, field) => {
-  
-}
-
 const initialState = players => ({
-  turns: [],
   players,
+  turns: [
+    {
+      index: 0,
+      fields: [[], []],
+    }
+  ],
 })
 
-const buildField = (decks, turnIndex) => {
-  return decks.map(find(propEq('turn', turnIndex)))
-}
-
-const playTurn = (state, turnIndex) => {
-  const field = buildField(decks(state), turnIndex)
-  const result = {
-    field,
-    playersLife: calculateLife(state, field)
-  }
-  return merge(state, { turns: [ ...state.turns, result ] })
-}
-
-function combat (state, turnIndex = 0) {
-  return new Promise((resolve) => {
-    const deadPlayers = state.players.find(player => player.hp < 0)
-
-    if (deadPlayers) {
-      resolve(state)
-    }
-
+const combat = (state, turnIndex = 0) =>
+  new Promise((resolve) => {
     return resolve(
-      combat(playTurn(state, turnIndex), turnIndex + 1)
+      combat(
+        playTurn(state, turnIndex),
+        turnIndex + 1
+      )
     )
   })
-}
 
 export default players => combat(initialState(players))

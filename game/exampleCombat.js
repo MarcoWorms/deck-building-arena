@@ -24,20 +24,19 @@ export default {
       index: 1,
       fields: [
         [
-          {
-            id: 'apian-jet-coot',
-            attacks: [],
-          },
+          'apian-jet-coot',
         ],
         [
+          'murderous-pixyish-neontetra',
+        ],
+      ],
+      attacks: [
+        [],
+        [
           {
-            id: 'murderous-pixyish-neontetra',
-            attacks: [
-              {
-                target: 'player',
-                damage: 1,
-              },
-            ],
+            from: 'murderous-pixyish-neontetra',
+            target: 'player',
+            damage: 1,
           },
         ],
       ],
@@ -46,33 +45,27 @@ export default {
       index: 2,
       fields: [
         [
+          'apian-jet-coot',
+          'changeful-durational-rhesusmonkey',
+        ],
+        [
+          'murderous-pixyish-neontetra',
+          'uncolourable-cubic-muntjac',
+        ],
+      ],
+      attacks: [
+        [
           {
-            id: 'apian-jet-coot',
-            attacks: [
-              {
-                target: 'player',
-                damage: 2,
-              },
-            ],
-          },
-          {
-            id: 'changeful-durational-rhesusmonkey',
-            attacks: [],
+            from: 'apian-jet-coot',
+            target: 'player',
+            damage: 2,
           },
         ],
         [
           {
-            id: 'murderous-pixyish-neontetra',
-            attacks: [
-              {
-                target: 'player',
-                damage: 1,
-              },
-            ],
-          },
-          {
-            id: 'uncolourable-cubic-muntjac',
-            attacks: [],
+            from: 'murderous-pixyish-neontetra',
+            target: 'player',
+            damage: 1,
           },
         ],
       ],
