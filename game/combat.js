@@ -27,6 +27,9 @@ const initialState = players => ({
 
 const combat = (state, turnIndex = 0) =>
   new Promise((resolve) => {
+    if (finishCondition(state)) {
+      return state
+    }
     return resolve(
       combat(
         playTurn(state, turnIndex),
