@@ -26,6 +26,7 @@
     "webpack-dev-server": "^2.4.5"
   },
   "scripts": {
+    "start": "npm run server:start && npm run front:start",
     "server:start": "webpack --config webpack.config.server.js && node server/dist/bundle.js",
     "front:start": "webpack-dev-server --config webpack.config.front.js",
     "test": "jest"
